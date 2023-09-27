@@ -1,14 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Pool } = require("pg");
-
-// Initialize a PostgreSQL connection pool
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false,
-  },
-});
+const pool = require("../db/db"); 
 
 // Create a task
 router.post("/", async (req, res) => {

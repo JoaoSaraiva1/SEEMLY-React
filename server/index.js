@@ -8,7 +8,7 @@ const express = require("express");
 const app = express();
 
 // Define the port for the server to listen on, defaulting to 3000
-const port = process.env.PORT || 3000;
+const port = process.env.DEV_PORT || 3000;
 
 const taskRouter = require("./routes/task_router.js");
 const userRouter = require("./routes/user_router.js");

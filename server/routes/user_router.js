@@ -1,21 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const { Pool } = require("pg");
-
-// Initialize a PostgreSQL connection pool
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false,
-  },
-});
+const pool = require("../db/db"); 
 
 // Create a user
 router.post("/", async (req, res) => {
   try {
     const { username, email, password, profile_pic } = req.body;
     const query = `
-      INSERT INTO users (username, email, password, profile_pic)
+      INSERT INTO task_list_app.users (username, email, password, profile_pic)
       VALUES ($1, $2, $3, $4)
       RETURNING *;
     `;
@@ -29,15 +21,15 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Read all users
+// Read all task_list_app.users
 router.get("/", async (req, res) => {
   try {
-    const query = "SELECT * FROM users";
+    const query = "SELECT * FROM task_list_app.users";
     const result = await pool.query(query);
     res.json(result.rows);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Error fetching users" });
+    res.status(500).json({ error: "Error fetching task_list_app.users" });
   }
 });
 
@@ -45,7 +37,7 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const userId = req.params.id;
-    const query = "SELECT * FROM users WHERE id = $1";
+    const query = "SELECT * FROM task_list_app.users WHERE id = $1";
     const result = await pool.query(query, [userId]);
 
     if (result.rows.length === 0) {
@@ -65,7 +57,7 @@ router.put("/:id", async (req, res) => {
     const userId = req.params.id;
     const { username, email, password, profile_pic } = req.body;
     const query = `
-        UPDATE users
+        UPDATE task_list_app.users
         SET username = $1, email = $2, password = $3, profile_pic = $4
         WHERE id = $5
         RETURNING *;
@@ -89,7 +81,7 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const userId = req.params.id;
-    const query = "DELETE FROM users WHERE id = $1 RETURNING *";
+    const query = "DELETE FROM task_list_app.users WHERE id = $1 RETURNING *";
     const result = await pool.query(query, [userId]);
 
     if (result.rows.length === 0) {
