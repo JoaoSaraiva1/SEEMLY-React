@@ -1,4 +1,3 @@
-'
 -- Create a new database called 'SEEMLY-React'
 CREATE DATABASE SEEMLY-React;
 

@@ -3,6 +3,7 @@ const dotenv = require("dotenv").config();
 
 // Import the Express.js library
 const express = require("express");
+const cors = require("cors"); // Import the cors middleware
 
 // Create an instance of the Express application
 const app = express();
@@ -12,9 +13,14 @@ const port = process.env.DEV_PORT || 3000;
 
 const taskRouter = require("./routes/task_router.js");
 const userRouter = require("./routes/user_router.js");
+const loginRouter = require("./routes/login_router.js");
+const registerRouter = require("./routes/register_router.js"); 
 
+app.use(cors()); // Use the cors middleware
 app.use("/tasks", taskRouter);
 app.use("/users", userRouter);
+app.use("/login", loginRouter);
+app.use("/register", registerRouter);
 
 // Start the server and listen on the specified port
 app.listen(port, () => {
