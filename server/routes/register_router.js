@@ -20,8 +20,8 @@ router.post("/", [
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
     const result = await db.query(
-      "INSERT INTO task_list_app.users (username, email, password, profile_pic) VALUES ($1, $2, $3, $4)",
-      [username, email, hashedPassword, profile_pic]
+      "INSERT INTO task_list_app.users (username, email, password) VALUES ($1, $2, $3)",
+      [username, email, hashedPassword]
     );
     const token = jwt.sign({ username }, process.env.JWT_SECRET);
     return res.status(201).json({ message: "Registration successful.", token });

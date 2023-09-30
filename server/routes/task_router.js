@@ -8,7 +8,7 @@ router.post("/", async (req, res) => {
     const { name, description, date, completion_state, favorite, deleted } =
       req.body;
     const query = `
-      INSERT INTO tasks (name, description, date, completion_state, favorite, deleted)
+      INSERT INTO task_list_app.tasks (name, description, date, completion_state, favorite, deleted)
       VALUES ($1, $2, $3, $4, $5, $6)
       RETURNING *;
     `;
@@ -32,7 +32,7 @@ router.post("/", async (req, res) => {
 // Read all tasks
 router.get("/", async (req, res) => {
   try {
-    const query = "SELECT * FROM tasks";
+    const query = "SELECT * FROM task_list_app.tasks";
     const result = await pool.query(query);
     res.json(result.rows);
   } catch (error) {
@@ -45,7 +45,7 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const taskId = req.params.id;
-    const query = "SELECT * FROM tasks WHERE id = $1";
+    const query = "SELECT * FROM task_list_app.tasks WHERE id = $1";
     const result = await pool.query(query, [taskId]);
 
     if (result.rows.length === 0) {
@@ -66,7 +66,7 @@ router.put("/:id", async (req, res) => {
     const { name, description, date, completion_state, favorite, deleted } =
       req.body;
     const query = `
-      UPDATE tasks
+      UPDATE task_list_app.tasks
       SET name = $1, description = $2, date = $3, completion_state = $4, favorite = $5, deleted = $6
       WHERE id = $7
       RETURNING *;
@@ -98,7 +98,7 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const taskId = req.params.id;
-    const query = "DELETE FROM tasks WHERE id = $1 RETURNING *";
+    const query = "DELETE FROM task_list_app.tasks WHERE id = $1 RETURNING *";
     const result = await pool.query(query, [taskId]);
 
     if (result.rows.length === 0) {
