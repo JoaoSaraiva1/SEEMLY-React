@@ -1,11 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate(); // Use useNavigate hook for navigation
+
+  useEffect(() => {
+    const token = Cookies.get("jwt");
+    if (token) {
+      navigate("/home"); 
+    }
+  }, [navigate]);
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -24,13 +33,8 @@ const Login = () => {
         password,
       });
       const { token } = response.data; // Assuming the server returns a token
-
-      // Store the token in localStorage or a secure storage mechanism
-      localStorage.setItem("token", token);
-
-      // Redirect the user or perform any other necessary actions
-      // You can use React Router for navigation
-      // history.push('/dashboard');
+      Cookies.set("jwt_token", token);
+      navigate("/home"); // Use navigate for redirection
     } catch (error) {
       setError("Authentication failed. Please check your credentials.");
     }
@@ -63,7 +67,9 @@ const Login = () => {
         </div>
         <button type="submit">Login</button>
       </form>
-      <p>Don't have an account? <Link to="/register">Register here</Link></p>
+      <p>
+        Don't have an account? <Link to="/register">Register here</Link>
+      </p>
     </div>
   );
 };
