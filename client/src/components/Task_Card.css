@@ -1,0 +1,77 @@
+/* Task_Card.css */
+
+/* Default styles for the task card */
+.task-card {
+  background-color: #f4f4f4;
+  border: 2px solid #e0e0e0;
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  margin: 16px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  max-width: 300px;
+  height: fit-content;
+}
+
+.task-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Star icon styles */
+.task-card__star {
+  position: absolute;
+  top: 2px;
+  right: 16px;
+  color: #f0c040; /* Yellow color for the star icon */
+}
+
+/* Title styles */
+.task-card__name {
+  font-size: 1.25rem;
+  margin-top: 8px;
+  padding: 0;
+  text-align: center;
+}
+
+/* Description styles */
+.task-card__description {
+  margin-top: 24px;
+  font-size: 1rem;
+}
+
+/* Date styles */
+.task-card__date {
+  margin-top: 32px;
+  font-size: 1rem;
+  color: #666;
+  font-weight: bold;
+}
+
+/* Completion state styles */
+.task-card__completion-state {
+  font-size: 0.875rem;
+  color: #4caf50;
+  text-align: left;
+  font-weight: bold;
+  font-size: large;
+}
+
+/* Line separator styles */
+.task-card__line {
+  border-top: 1px solid #ccc; /* You can adjust the color and style of the line here as needed */
+}
+
+.task-card__bottom {
+  display: flex;
+  align-items: center; /* Vertically center align items */
+  justify-content: space-between; /* Add space between the icons and completion status */
+}
+
+.task-card__icon {
+  font-size: 1.5rem;
+  color: #666;
+  margin-right: 6px;
+  cursor: pointer;
+}

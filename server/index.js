@@ -12,6 +12,7 @@ const taskRouter = require("./routes/task_router.js");
 const userRouter = require("./routes/user_router.js");
 const loginRouter = require("./routes/login_router.js");
 const registerRouter = require("./routes/register_router.js"); 
+const categoriesRouter = require("./routes/categories_router.js"); 
 
 app.use(cors()); // Use the cors middleware
 app.use(express.json());
@@ -19,6 +20,7 @@ app.use("/tasks", taskRouter);
 app.use("/users", userRouter);
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
+app.use("/categories", categoriesRouter);
 
 // Define the port for the server to listen on, defaulting to 3000
 const port = process.env.DEV_PORT || 3000;
