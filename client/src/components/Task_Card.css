@@ -10,7 +10,9 @@
   margin: 16px;
   transition: transform 0.2s, box-shadow 0.2s;
   position: relative;
+  min-width: 300px;
   max-width: 300px;
+  min-height: 215px;
   height: fit-content;
 }
 
@@ -20,7 +22,7 @@
 }
 
 /* Star icon styles */
-.task-card__star {
+.task-card_star {
   position: absolute;
   top: 2px;
   right: 16px;
@@ -28,7 +30,7 @@
 }
 
 /* Title styles */
-.task-card__name {
+.task-card_name {
   font-size: 1.25rem;
   margin-top: 8px;
   padding: 0;
@@ -36,13 +38,13 @@
 }
 
 /* Description styles */
-.task-card__description {
+.task-card_description {
   margin-top: 24px;
   font-size: 1rem;
 }
 
 /* Date styles */
-.task-card__date {
+.task-card_date {
   margin-top: 32px;
   font-size: 1rem;
   color: #666;
@@ -50,7 +52,7 @@
 }
 
 /* Completion state styles */
-.task-card__completion-state {
+.task-card_completion-state {
   font-size: 0.875rem;
   color: #4caf50;
   text-align: left;
@@ -59,19 +61,92 @@
 }
 
 /* Line separator styles */
-.task-card__line {
+.task-card_line {
   border-top: 1px solid #ccc; /* You can adjust the color and style of the line here as needed */
 }
 
-.task-card__bottom {
+.task-card_bottom {
   display: flex;
   align-items: center; /* Vertically center align items */
   justify-content: space-between; /* Add space between the icons and completion status */
 }
 
-.task-card__icon {
+.task-card_icon {
   font-size: 1.5rem;
   color: #666;
   margin-right: 6px;
   cursor: pointer;
+}
+
+/* Styles for edit mode */
+.task-card_name_editing,
+.task-card_date_editing {
+  display: block; /* Show the input fields and button */
+  margin-top: 12px; /* Add spacing between elements */
+  margin-right: 8px;
+  width: 95%; /* Expand input fields and button to full width */
+  padding: 8px; /* Add some padding to input fields and button */
+  font-size: 1rem; /* Adjust font size */
+  border: 1px solid #ccc; /* Add a border to input fields and button */
+  border-radius: 4px; /* Add border radius */
+  transition: border-color 0.3s; /* Smooth transition for border color */
+
+  /* Focus styles */
+  &:focus {
+    border-color: #007bff; /* Change border color on focus */
+    outline: none; /* Remove default focus outline */
+  }
+}
+
+.task-card_description_editing {
+  display: block; /* Show the input fields and button */
+  margin-top: 8px; /* Add spacing between elements */
+  width: 100%; /* Expand input fields and button to full width */
+  padding: 8px; /* Add some padding to input fields and button */
+  font-size: 1rem; /* Adjust font size */
+  border: 1px solid #ccc; /* Add a border to input fields and button */
+  border-radius: 4px; /* Add border radius */
+  transition: border-color 0.3s; /* Smooth transition for border color */
+  height: auto;
+  word-wrap: break-word;
+  resize: vertical; 
+  width: 95%;
+
+  /* Focus styles */
+  &:focus {
+    border-color: #007bff; /* Change border color on focus */
+    outline: none; /* Remove default focus outline */
+  }
+}
+
+.task-card_button_editing {
+  display: block; /* Show the input fields and button */
+  margin-top: 12px; /* Add spacing between elements */
+  margin-right: 8px;
+  width: 100%; /* Expand input fields and button to full width */
+  padding: 8px; /* Add some padding to input fields and button */
+  font-size: 1rem; /* Adjust font size */
+  border: 1px solid #ccc; /* Add a border to input fields and button */
+  border-radius: 4px; /* Add border radius */
+  transition: border-color 0.3s; /* Smooth transition for border color */
+
+  /* Focus styles */
+  &:focus {
+    border-color: #007bff; /* Change border color on focus */
+    outline: none; /* Remove default focus outline */
+  }
+}
+
+.task-card_icon_editing {
+  background-color: #007bff; /* Add background color to the "Save" button */
+  color: #fff; /* Change text color to white */
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  margin-top: 16px; /* Add more spacing between input fields and button */
+
+  /* Hover styles */
+  &:hover {
+    background-color: #0056b3; /* Darker background color on hover */
+  }
 }
