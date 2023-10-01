@@ -4,7 +4,6 @@ const pool = require("../db/db");
 
 // Create a task
 router.post("/", async (req, res) => {
-  console.log("🚀 ~ file: task_router.js:7 ~ router.post ~ req:", req.body)
   try {
     const { name, description, date, completion_state, favorite, deleted, category_id } =
       req.body;

@@ -12,7 +12,7 @@ import "./Task_Form.css";
 
 Modal.setAppElement("#root");
 
-const Task_Form = ({ onAddTask, onClose, isOpen, categories }) => {
+const Task_Form = ({ onClose, isOpen, categories }) => {
   const [taskName, setTaskName] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const [taskDate, setTaskDate] = useState(
