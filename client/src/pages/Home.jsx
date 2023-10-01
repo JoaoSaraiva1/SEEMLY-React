@@ -33,7 +33,6 @@ const Home = () => {
         <div
           className="add-card"
           style={{
-            backgroundColor: "transparent",
             border: "2px dashed #BDBDBD",
             width: "300px",
             height: "215px",

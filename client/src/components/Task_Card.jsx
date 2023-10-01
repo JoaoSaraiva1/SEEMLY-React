@@ -3,11 +3,11 @@ import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-
-import "./Task_Card.css";
-
 import { Box, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import IOSSwitch from "./Utils/IOSSwitch";
+
+import "./Task_Card.css";
 
 const Task_Card = ({ task }) => {
   const {
@@ -39,6 +39,7 @@ const Task_Card = ({ task }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isFavorite, setIsFavorite] = useState(favorite);
   const [isDeleted, setIsDeleted] = useState(false);
+  const [isCompleted, setIsCompleted] = useState(completion_state);
 
   const handleFavoriteClick = () => {
     const updatedTask = { ...task, favorite: !task.favorite };
@@ -81,6 +82,21 @@ const Task_Card = ({ task }) => {
 
   const handleDateChange = (event) => {
     setDate(event.target.value);
+  };
+
+  const handleCompletedChange = () => {
+    const updatedTask = { ...task, completion_state: !isCompleted };
+
+    fetch(`http://localhost:5000/tasks/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedTask),
+    })
+      .then((response) => response.json())
+      .then(() => setIsCompleted(!isCompleted))
+      .catch((error) => console.log(error));
   };
 
   const handleSubmit = () => {
@@ -150,9 +166,9 @@ const Task_Card = ({ task }) => {
         <>
           <p className="task-card_star" onClick={handleFavoriteClick}>
             {isFavorite ? (
-              <StarIcon sx={{ fontSize: 32 }}  />
+              <StarIcon sx={{ fontSize: 32 }} />
             ) : (
-              <StarBorderIcon sx={{ fontSize: 32 }}  />
+              <StarBorderIcon sx={{ fontSize: 32 }} />
             )}
           </p>
           <h2 className="task-card_name">{name}</h2>
@@ -160,9 +176,19 @@ const Task_Card = ({ task }) => {
           <p className="task-card_date">{formattedDate}</p>
           <div className="task-card_line"></div>
           <div className="task-card_bottom">
-            <p className="task-card_completion-state">
-              {completion_state ? "Completed" : "Uncompleted"}
+            <IOSSwitch
+              sx={{ m: 1 }}
+              checked={isCompleted}
+              onChange={handleCompletedChange}
+            />
+            <p
+              className={`task-card_completion-state ${
+                isCompleted ? "completed" : ""
+              }`}
+            >
+              {isCompleted ? "Completed" : "Uncompleted"}
             </p>
+
             <div className="task-card_icons">
               <EditIcon className="task-card_icon" onClick={handleEditClick} />
               <DeleteIcon

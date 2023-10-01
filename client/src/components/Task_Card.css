@@ -50,15 +50,6 @@
   font-weight: bold;
 }
 
-/* Completion state styles */
-.task-card_completion-state {
-  font-size: 0.875rem;
-  color: #4caf50;
-  text-align: left;
-  font-weight: bold;
-  font-size: large;
-}
-
 /* Line separator styles */
 .task-card_line {
   border-top: 1px solid #ccc; /* You can adjust the color and style of the line here as needed */
@@ -68,6 +59,18 @@
   display: flex;
   align-items: center; /* Vertically center align items */
   justify-content: space-between; /* Add space between the icons and completion status */
+}
+
+.task-card_completion-state {
+  font-size: 0.875rem;
+  font-weight: bold;
+  font-size: large;
+  text-align: left;
+  margin-right: 80px;
+  color: #666; /* Default color for uncompleted state */
+}
+.completed {
+  color: green; /* Set the text color to green for completed tasks */
 }
 
 .task-card_icon {
