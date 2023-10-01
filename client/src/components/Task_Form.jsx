@@ -21,33 +21,40 @@ const Task_Form = ({ onClose, isOpen, categories }) => {
   const [taskFavorite, setTaskFavorite] = useState(false);
   const [taskPriority, setTaskPriority] = useState("medium");
   const [taskCategory, setTaskCategory] = useState("");
+  const [error, setError] = useState(null); // Added state for error handling
 
   const handleAddTask = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:5000/tasks", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: taskName,
-        description: taskDescription,
-        date: taskDate,
-        favorite: taskFavorite,
-        priority: taskPriority,
-        category_id: taskCategory.value,
-      }),
-    });
-    if (response.ok) {
-      setTaskName("");
-      setTaskDescription("");
-      setTaskDate("");
-      setTaskFavorite(false);
-      setTaskPriority("medium");
-      setTaskCategory("");
-      onClose();
-    } else {
-      console.error("Failed to add task");
+    try {
+      const response = await fetch("http://localhost:5000/tasks", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: taskName,
+          description: taskDescription,
+          date: taskDate,
+          favorite: taskFavorite,
+          priority: taskPriority,
+          category_id: taskCategory.value,
+        }),
+      });
+      if (response.ok) {
+        setTaskName("");
+        setTaskDescription("");
+        setTaskDate("");
+        setTaskFavorite(false);
+        setTaskPriority("medium");
+        setTaskCategory("");
+        onClose();
+      } else {
+        setError("Failed to add task");
+      }
+    } catch (error) {
+      setError(
+        "An error occurred during the fetch operation: " + error.message
+      );
     }
   };
 

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -6,10 +7,11 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Box, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import IOSSwitch from "./Utils/IOSSwitch";
+import Select from "react-select";
 
 import "./Task_Card.css";
 
-const Task_Card = ({ task }) => {
+const Task_Card = ({ task, categories }) => {
   const {
     id,
     name: initialName,
@@ -40,20 +42,35 @@ const Task_Card = ({ task }) => {
   const [isFavorite, setIsFavorite] = useState(favorite);
   const [isDeleted, setIsDeleted] = useState(false);
   const [isCompleted, setIsCompleted] = useState(completion_state);
+  const [taskCategory, setTaskCategory] = useState("");
+  console.log("🚀 ~ file: Task_Card.jsx:46 ~ taskCategory:", taskCategory)
+
+  const categoryOptions = categories.map((category) => ({
+    label: category.name,
+    value: category.id,
+  }));
+
+  useEffect(() => {
+    setTaskCategory(
+      categories.find((category) => category.id === task.category_id)
+    );
+  }, [categories, task.category_id]);
+
+  const categoryClassName = taskCategory
+    ? `category-container category-${taskCategory.id}`
+    : "category-container";
 
   const handleFavoriteClick = () => {
     const updatedTask = { ...task, favorite: !task.favorite };
 
-    fetch(`http://localhost:5000/tasks/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedTask),
-    })
-      .then((response) => response.json())
-      .then(() => setIsFavorite(!isFavorite))
-      .catch((error) => console.log(error));
+    axios
+      .put(`http://localhost:5000/tasks/${id}`, updatedTask)
+      .then((response) => {
+        setIsFavorite(!isFavorite);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const handleEditClick = () => {
@@ -61,15 +78,15 @@ const Task_Card = ({ task }) => {
   };
 
   const handleDeleteClick = () => {
-    fetch(`http://localhost:5000/tasks/${id}`, {
-      method: "DELETE",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
+    axios
+      .delete(`http://localhost:5000/tasks/${id}`)
+      .then((response) => {
+        console.log(response.data);
         setIsDeleted(true);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const handleNameChange = (event) => {
@@ -87,33 +104,37 @@ const Task_Card = ({ task }) => {
   const handleCompletedChange = () => {
     const updatedTask = { ...task, completion_state: !isCompleted };
 
-    fetch(`http://localhost:5000/tasks/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedTask),
-    })
-      .then((response) => response.json())
-      .then(() => setIsCompleted(!isCompleted))
-      .catch((error) => console.log(error));
+    axios
+      .put(`http://localhost:5000/tasks/${id}`, updatedTask)
+      .then((response) => {
+        setIsCompleted(!isCompleted);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const handleSubmit = () => {
-    fetch(`http://localhost:5000/tasks/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        description,
-        date,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((error) => console.log(error));
+    const updatedTask = {
+      ...task,
+      name,
+      description,
+      date,
+      category_id: taskCategory.id,
+    };
+    console.log(
+      "🚀 ~ file: Task_Card.jsx:132 ~ handleSubmit ~ updatedTask:",
+      updatedTask
+    );
+
+    axios
+      .put(`http://localhost:5000/tasks/${id}`, updatedTask)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
     setIsEditing(false);
   };
@@ -129,10 +150,22 @@ const Task_Card = ({ task }) => {
     setIsEditing(false);
   };
 
+
   return (
     <div className="task-card">
+      <div className={categoryClassName}>
+        {taskCategory ? taskCategory.name : "No Category"}
+      </div>
       {isEditing ? (
         <>
+          <Select
+            className="task-card_category_editing"
+            value={taskCategory.name}
+            options={categoryOptions}
+            onChange={(selectedOption) => {
+              setTaskCategory(selectedOption);
+            }}
+          />
           <Box sx={{ position: "absolute", top: 5, right: 5 }}>
             <IconButton onClick={handleCancelClick}>
               <CloseIcon />
@@ -188,7 +221,6 @@ const Task_Card = ({ task }) => {
             >
               {isCompleted ? "Completed" : "Uncompleted"}
             </p>
-
             <div className="task-card_icons">
               <EditIcon className="task-card_icon" onClick={handleEditClick} />
               <DeleteIcon

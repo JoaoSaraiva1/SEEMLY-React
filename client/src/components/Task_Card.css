@@ -81,7 +81,7 @@
 }
 
 /* Styles for edit mode */
-.task-card_name_editing{
+.task-card_name_editing {
   display: block; /* Show the input fields and button */
   margin-top: 32px;
   margin-bottom: 10px;
@@ -110,7 +110,7 @@
   transition: border-color 0.3s; /* Smooth transition for border color */
   height: auto;
   word-wrap: break-word;
-  resize: vertical; 
+  resize: vertical;
   width: 95%;
 
   /* Focus styles */
@@ -173,4 +173,31 @@
   &:hover {
     background-color: #0056b3; /* Darker background color on hover */
   }
+}
+
+.category-container {
+  position: absolute;
+  top: -20px;
+  left: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+/* Category-specific styles */
+.category-1 {
+  background-color: #e9e97f; /* Red background for "Work" */
+}
+
+.category-2 {
+  background-color: #1d9a1d; /* Green background for "Home" */
+}
+
+.category-3 {
+  background-color: #a1a1f6; /* Blue background for "School" */
+}
+
+.task-card_category_editing{
+  width: 50%;
 }
