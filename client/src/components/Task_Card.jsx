@@ -10,7 +10,7 @@ import { Box, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
 const Task_Card = ({ task }) => {
-    const {
+  const {
     id,
     name: initialName,
     description: initialDescription,
@@ -22,7 +22,6 @@ const Task_Card = ({ task }) => {
   // Convert the ISO date string to a Date object
   const parsedDate = new Date(initialDate);
 
-
   const options = {
     year: "numeric",
     month: "long",
@@ -30,7 +29,9 @@ const Task_Card = ({ task }) => {
   };
 
   // Format the parsed date
-  const formattedDate = new Intl.DateTimeFormat("en-US", options).format(parsedDate);
+  const formattedDate = new Intl.DateTimeFormat("en-US", options).format(
+    parsedDate
+  );
 
   const [name, setName] = useState(initialName);
   const [description, setDescription] = useState(initialDescription);
@@ -38,7 +39,7 @@ const Task_Card = ({ task }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isFavorite, setIsFavorite] = useState(favorite);
   const [isDeleted, setIsDeleted] = useState(false);
-  
+
   const handleFavoriteClick = () => {
     const updatedTask = { ...task, favorite: !task.favorite };
 
@@ -79,7 +80,7 @@ const Task_Card = ({ task }) => {
   };
 
   const handleDateChange = (event) => {
-setDate(event.target.value);
+    setDate(event.target.value);
   };
 
   const handleSubmit = () => {
@@ -148,7 +149,11 @@ setDate(event.target.value);
       ) : (
         <>
           <p className="task-card_star" onClick={handleFavoriteClick}>
-            {isFavorite ? <StarIcon /> : <StarBorderIcon />}
+            {isFavorite ? (
+              <StarIcon sx={{ fontSize: 32 }}  />
+            ) : (
+              <StarBorderIcon sx={{ fontSize: 32 }}  />
+            )}
           </p>
           <h2 className="task-card_name">{name}</h2>
           <p className="task-card_description">{description}</p>
