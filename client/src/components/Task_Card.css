@@ -31,7 +31,7 @@
 
 /* Title styles */
 .task-card_name {
-  font-size: 1.25rem;
+  font-size: 2rem;
   margin-top: 8px;
   padding: 0;
   text-align: center;
@@ -39,8 +39,7 @@
 
 /* Description styles */
 .task-card_description {
-  margin-top: 24px;
-  font-size: 1rem;
+  font-size: 1.25rem;
 }
 
 /* Date styles */
@@ -79,11 +78,10 @@
 }
 
 /* Styles for edit mode */
-.task-card_name_editing,
-.task-card_date_editing {
+.task-card_name_editing{
   display: block; /* Show the input fields and button */
-  margin-top: 12px; /* Add spacing between elements */
-  margin-right: 8px;
+  margin-top: 32px;
+  margin-bottom: 10px;
   width: 95%; /* Expand input fields and button to full width */
   padding: 8px; /* Add some padding to input fields and button */
   font-size: 1rem; /* Adjust font size */
@@ -100,7 +98,7 @@
 
 .task-card_description_editing {
   display: block; /* Show the input fields and button */
-  margin-top: 8px; /* Add spacing between elements */
+  margin-bottom: 10px; /* Add spacing between elements */
   width: 100%; /* Expand input fields and button to full width */
   padding: 8px; /* Add some padding to input fields and button */
   font-size: 1rem; /* Adjust font size */
@@ -119,11 +117,10 @@
   }
 }
 
-.task-card_button_editing {
+.task-card_date_editing {
   display: block; /* Show the input fields and button */
-  margin-top: 12px; /* Add spacing between elements */
-  margin-right: 8px;
-  width: 100%; /* Expand input fields and button to full width */
+  margin-bottom: 10px;
+  width: 95%; /* Expand input fields and button to full width */
   padding: 8px; /* Add some padding to input fields and button */
   font-size: 1rem; /* Adjust font size */
   border: 1px solid #ccc; /* Add a border to input fields and button */
@@ -134,6 +131,30 @@
   &:focus {
     border-color: #007bff; /* Change border color on focus */
     outline: none; /* Remove default focus outline */
+  }
+}
+
+.task-card_button_editing {
+  display: block; /* Show the input fields and button */
+  margin-top: 12px; /* Add spacing between elements */
+  margin-right: 8px;
+  width: 100%; /* Expand input fields and button to full width */
+  padding: 8px; /* Add some padding to input fields and button */
+  font-size: 1rem; /* Adjust font size */
+  border: 1px solid #ccc; /* Add a border to input fields and button */
+  border-radius: 4px; /* Add border radius */
+  transition: border-color 0.3s; /* Smooth transition for border color */
+  background-color: #007bff;
+  color: #fff;
+  /* Focus styles */
+  &:focus {
+    border-color: #007bff; /* Change border color on focus */
+    outline: none; /* Remove default focus outline */
+  }
+
+  /* Hover styles */
+  &:hover {
+    cursor: pointer;
   }
 }
 
