@@ -18,7 +18,7 @@ router.post(
 
     try {
       const user = await pool.query(
-        "SELECT * FROM task_list_app.users WHERE username = $1",
+        "SELECT * FROM users WHERE username = $1",
         [username]
       );
 
