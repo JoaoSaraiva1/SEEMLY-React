@@ -4,12 +4,13 @@ const pool = require("../db/db");
 
 // Create a task
 router.post("/", async (req, res) => {
+  console.log("🚀 ~ file: task_router.js:7 ~ router.post ~ req:", req.body)
   try {
-    const { name, description, date, completion_state, favorite, deleted } =
+    const { name, description, date, completion_state, favorite, deleted, category_id } =
       req.body;
     const query = `
-      INSERT INTO tasks (name, description, date, completion_state, favorite, deleted)
-      VALUES ($1, $2, $3, $4, $5, $6)
+      INSERT INTO tasks (name, description, date, completion_state, favorite, deleted, category_id)
+      VALUES ($1, $2, $3, $4, $5, $6, $7)
       RETURNING *;
     `;
     const values = [
@@ -19,6 +20,7 @@ router.post("/", async (req, res) => {
       completion_state,
       favorite,
       deleted,
+      category_id,
     ];
 
     const result = await pool.query(query, values);

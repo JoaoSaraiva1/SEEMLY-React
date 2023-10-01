@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import "./Task_Card.css";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+
+import "./Task_Card.css";
 
 const Task_Card = ({ task }) => {
     const {
@@ -25,9 +26,7 @@ const Task_Card = ({ task }) => {
     };
 
     // Format the parsed date
-    const formattedDate = new Intl.DateTimeFormat("en-US", options).format(
-        parsedDate
-    );
+    const formattedDate = new Intl.DateTimeFormat("en-US", options).format(parsedDate);
     const [name, setName] = useState(initialName);
     const [description, setDescription] = useState(initialDescription);
     const [date, setDate] = useState(initialDate);

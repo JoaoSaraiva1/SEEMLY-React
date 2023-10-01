@@ -1,0 +1,175 @@
+/* Task_Form.css */
+
+/* Styles for the modal content */
+.task-modal_content {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto; /* Center horizontally */
+  padding: 20px;
+  background-color: #e7e7e7; /* White background */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: fixed; /* Fixed position to center vertically */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(
+    -50%,
+    -50%
+  ); /* Center both horizontally and vertically */
+}
+
+/* Styles for the overlay */
+.task-modal_overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* Styles for buttons */
+.btn {
+  margin: 10px;
+  margin-top: 0px;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s, transform 0.1s;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #0056b3;
+  transform: scale(1.05); /* Slight scale-up on hover/focus */
+}
+
+.btn-secondary {
+  background-color: #e1b04c;
+  color: #333;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background-color: #c84747;
+  color: #fff;
+  transform: scale(1.05); /* Slight scale-up on hover/focus */
+}
+
+/* Styles for form elements */
+.task-modal_input_area {
+  margin: 10px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.task-modal_name_input_field,
+.task-modal_category_input_field {
+  width: 95%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.task-modal_date_input_field {
+  width: 95%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none; /* Remove the default outline */
+}
+
+.task-modal_textarea_field {
+  width: 95%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  min-height: 75px;
+  resize: vertical;
+}
+
+.task-modal_priority_select_field {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Style for the button area */
+.task-modal_button_area {
+  text-align: center;
+}
+
+.task-modal_favorite {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Style for the favorite icon */
+.task-modal_favorite_icon {
+  color: #f7b500; /* Golden yellow */
+  cursor: pointer;
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
+
+/* Style for the category input field */
+.task-modal_category_input_field {
+  text-transform: capitalize;
+}
+
+.task-modal_title_area {
+  display: flex;
+  align-items: center; /* Vertically center items */
+  padding: 20px;
+  margin: 10px;
+  margin-left: 0px;
+}
+
+.task-modal_title_area .MuiSvgIcon-root {
+  font-size: 24px; /* Adjust the icon size as needed */
+  margin-right: 10px; /* Add some space between the icon and title */
+}
+
+.task-modal_title_area {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.task-modal_title_area .MuiSvgIcon-root {
+  font-size: 28px;
+  margin-right: 10px;
+}
+
+/* Style for the form title */
+.task-modal_title {
+  font-size: 26px;
+  margin: 0;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
