@@ -10,7 +10,7 @@ const Home = () => {
   const [tasks, setTasks] = useState([]);
   const [categories, setCategories] = useState([]);
   const [showForm, setShowForm] = useState(false);
-  const [sortOption, setSortOption] = useState("uncompletedFirst");
+  const [sortOption, setSortOption] = useState("date");
 
   useEffect(() => {
     fetch("http://localhost:5000/tasks")
