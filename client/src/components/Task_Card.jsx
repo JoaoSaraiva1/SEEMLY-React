@@ -133,13 +133,16 @@ const Task_Card = ({ task, categories }) => {
       name,
       description,
       date,
+
       category_id: selectedCategory.value,
     };
 
     axios
       .put(`http://localhost:5000/tasks/${id}`, updatedTask)
       .then((response) => {
+
         setTaskCategory(selectedCategory);
+
       })
       .catch((error) => {
         console.log(error);
