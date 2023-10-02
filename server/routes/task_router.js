@@ -62,7 +62,6 @@ router.get("/:id", async (req, res) => {
 
 // Update a task by ID
 router.put("/:id", async (req, res) => {
-  console.log("🚀 ~ file: task_router.js:65 ~ router.put ~ req:", req.body)
   try {
     const taskId = req.params.id;
     const { name, description, date, completion_state, favorite, deleted } =

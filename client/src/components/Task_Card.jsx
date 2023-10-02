@@ -43,7 +43,10 @@ const Task_Card = ({ task, categories }) => {
   const [isDeleted, setIsDeleted] = useState(false);
   const [isCompleted, setIsCompleted] = useState(completion_state);
   const [taskCategory, setTaskCategory] = useState("");
-  console.log("🚀 ~ file: Task_Card.jsx:46 ~ taskCategory:", taskCategory)
+  const [selectedCategory, setSelectedCategory] = useState({
+    value: taskCategory.id,
+    label: taskCategory.name,
+  });
 
   const categoryOptions = categories.map((category) => ({
     label: category.name,
@@ -51,13 +54,24 @@ const Task_Card = ({ task, categories }) => {
   }));
 
   useEffect(() => {
-    setTaskCategory(
-      categories.find((category) => category.id === task.category_id)
+    const selectedCategory = categories.find(
+      (category) => category.id === task.category_id
     );
+  
+    if (selectedCategory) {
+      const formattedCategory = {
+        value: selectedCategory.id,
+        label: selectedCategory.name,
+      };
+  
+      setTaskCategory(formattedCategory);
+      setSelectedCategory(formattedCategory);
+    }
   }, [categories, task.category_id]);
+  
 
   const categoryClassName = taskCategory
-    ? `category-container category-${taskCategory.id}`
+    ? `category-container category-${taskCategory.value}`
     : "category-container";
 
   const handleFavoriteClick = () => {
@@ -150,20 +164,19 @@ const Task_Card = ({ task, categories }) => {
     setIsEditing(false);
   };
 
-
   return (
     <div className="task-card">
       <div className={categoryClassName}>
-        {taskCategory ? taskCategory.name : "No Category"}
+        {taskCategory ? taskCategory.label : "No Category"}
       </div>
       {isEditing ? (
         <>
           <Select
             className="task-card_category_editing"
-            value={taskCategory.name}
+            value={selectedCategory}
             options={categoryOptions}
             onChange={(selectedOption) => {
-              setTaskCategory(selectedOption);
+              setSelectedCategory(selectedOption);
             }}
           />
           <Box sx={{ position: "absolute", top: 5, right: 5 }}>
