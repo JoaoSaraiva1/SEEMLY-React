@@ -53,7 +53,7 @@ const Home = () => {
           <p style={{ margin: "8px", fontWeight: "bold" }}>Add a new task</p>
         </div>
         {tasks.map((task) => (
-          <Task_Card key={task.id} task={task} />
+          <Task_Card key={task.id} task={task} categories={categories} />
         ))}
       </div>
       <div>
