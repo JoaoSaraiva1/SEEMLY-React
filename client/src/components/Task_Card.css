@@ -111,14 +111,14 @@
 
 .task-card_description_editing {
   display: block; /* Show the input fields and button */
-  margin-bottom: 10px; /* Add spacing between elements */
+  margin-bottom: 12px; /* Add spacing between elements */
   width: 100%; /* Expand input fields and button to full width */
   padding: 8px; /* Add some padding to input fields and button */
   font-size: 1rem; /* Adjust font size */
   border: 1px solid #ccc; /* Add a border to input fields and button */
   border-radius: 4px; /* Add border radius */
   transition: border-color 0.3s; /* Smooth transition for border color */
-  height: auto;
+  height: 4rem;
   word-wrap: break-word;
   resize: vertical;
   width: 95%;
@@ -132,7 +132,7 @@
 
 .task-card_date_editing {
   display: block; /* Show the input fields and button */
-  margin-bottom: 10px;
+  margin-bottom: 12px; /* Add spacing between elements */
   width: 95%; /* Expand input fields and button to full width */
   padding: 8px; /* Add some padding to input fields and button */
   font-size: 1rem; /* Adjust font size */
@@ -150,7 +150,8 @@
 .task-card_button_editing {
   display: block; /* Show the input fields and button */
   margin-top: 12px; /* Add spacing between elements */
-  margin-right: 8px;
+  margin-bottom: 6px; /* Add spacing between elements */
+  margin-right: 8px; /* Add spacing between elements */
   width: 100%; /* Expand input fields and button to full width */
   padding: 8px; /* Add some padding to input fields and button */
   font-size: 1rem; /* Adjust font size */
@@ -183,4 +184,31 @@
   &:hover {
     background-color: #0056b3; /* Darker background color on hover */
   }
+}
+
+.category-container {
+  position: absolute;
+  top: -20px;
+  left: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+/* Category-specific styles */
+.category-1 {
+  background-color: #e9e97f; /* Red background for "Work" */
+}
+
+.category-2 {
+  background-color: #8ebf8e; /* Green background for "Home" */
+}
+
+.category-3 {
+  background-color: #a1a1f6; /* Blue background for "School" */
+}
+
+.task-card_category_editing{
+  width: 50%;
 }
