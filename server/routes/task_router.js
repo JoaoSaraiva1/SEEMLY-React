@@ -64,11 +64,11 @@ router.get("/:id", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     const taskId = req.params.id;
-    const { name, description, date, completion_state, favorite, deleted } =
+    const { name, description, date, completion_state, favorite, deleted, category_id } =
       req.body;
     const query = `
       UPDATE tasks
-      SET name = $1, description = $2, date = $3, completion_state = $4, favorite = $5, deleted = $6
+      SET name = $1, description = $2, date = $3, completion_state = $4, favorite = $5, deleted = $6, category_id = $8
       WHERE id = $7
       RETURNING *;
     `;
@@ -80,6 +80,7 @@ router.put("/:id", async (req, res) => {
       favorite,
       deleted,
       taskId,
+      category_id,
     ];
 
     const result = await pool.query(query, values);

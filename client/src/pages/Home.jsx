@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-pascal-case */
 import React, { useState, useEffect } from "react";
 import Task_Card from "../components/Task_Card";
 import Task_Form from "../components/Task_Form";

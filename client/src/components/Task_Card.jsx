@@ -69,7 +69,6 @@ const Task_Card = ({ task, categories }) => {
     }
   }, [categories, task.category_id]);
   
-
   const categoryClassName = taskCategory
     ? `category-container category-${taskCategory.value}`
     : "category-container";
@@ -134,17 +133,16 @@ const Task_Card = ({ task, categories }) => {
       name,
       description,
       date,
-      category_id: taskCategory.id,
+
+      category_id: selectedCategory.value,
     };
-    console.log(
-      "🚀 ~ file: Task_Card.jsx:132 ~ handleSubmit ~ updatedTask:",
-      updatedTask
-    );
 
     axios
       .put(`http://localhost:5000/tasks/${id}`, updatedTask)
       .then((response) => {
-        console.log(response.data);
+
+        setTaskCategory(selectedCategory);
+
       })
       .catch((error) => {
         console.log(error);
