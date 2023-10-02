@@ -5,6 +5,7 @@ import TaskForm from "../components/Task_Form";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import TaskSorting from "../components/Task_Sorting";
 import { sortTasks } from "../utils/Sort_Tasks";
+import Task_Completed from "../components/Task_Completed";
 
 const Home = () => {
   const [tasks, setTasks] = useState([]);
@@ -36,10 +37,20 @@ const Home = () => {
     setShowForm(false);
   };
 
+  const completedTasks = sortedTasks.filter((task) => task.completion_state);
+
+  const numberOfCompletedTasks = completedTasks.length;
+
   return (
     <div>
       <h1>Task Manager</h1>
-      <TaskSorting onSort={handleSort} />
+      <div className="search-sort-completed">
+        <TaskSorting onSort={handleSort} />
+        <Task_Completed
+          completedTasks={numberOfCompletedTasks}
+          totalTasks={tasks.length}
+        />
+      </div>
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         <div
           className="add-card"
