@@ -35,7 +35,7 @@ const Home = () => {
           style={{
             border: "2px dashed #BDBDBD",
             width: "300px",
-            height: "215px",
+            height: "300px",
             borderRadius: "16px",
             margin: "16px",
             padding: "16px",
