@@ -52,7 +52,6 @@
 .btn-primary:hover,
 .btn-primary:focus {
   background-color: #0056b3;
-  transform: scale(1.05); /* Slight scale-up on hover/focus */
 }
 
 .btn-secondary {
@@ -64,7 +63,6 @@
 .btn-secondary:focus {
   background-color: #c84747;
   color: #fff;
-  transform: scale(1.05); /* Slight scale-up on hover/focus */
 }
 
 /* Styles for form elements */
