@@ -6,12 +6,17 @@ import AddBoxIcon from "@mui/icons-material/AddBox";
 import TaskSorting from "../components/Task_Sorting";
 import { sortTasks } from "../utils/Sort_Tasks";
 import Task_Completed from "../components/Task_Completed";
+import TaskSearch from "../components/Task_Search";
 
 const Home = () => {
   const [tasks, setTasks] = useState([]);
+  console.log("🚀 ~ file: Home.jsx:12 ~ Home ~ tasks:", tasks);
   const [categories, setCategories] = useState([]);
   const [showForm, setShowForm] = useState(false);
+  const [filteredTasks, setFilteredTasks] = useState([]);
+  console.log("🚀 ~ file: Home.jsx:16 ~ Home ~ filteredTasks:", filteredTasks)
   const [sortOption, setSortOption] = useState("date");
+  const [searchQuery, setSearchQuery] = useState(""); 
 
   useEffect(() => {
     fetch("http://localhost:5000/tasks")
@@ -28,6 +33,17 @@ const Home = () => {
   };
 
   const sortedTasks = sortTasks(tasks, sortOption);
+
+  useEffect(() => {
+    const filtered = sortedTasks.filter((task) =>
+      task.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredTasks(filtered);
+  }, [tasks, searchQuery, sortedTasks]);
+
+  const handleSearch = (newQuery) => {
+    setSearchQuery(newQuery); 
+  };
 
   const handleToggleForm = () => {
     setShowForm(!showForm);
@@ -51,6 +67,8 @@ const Home = () => {
           totalTasks={tasks.length}
         />
       </div>
+      <TaskSorting onSort={handleSort} />
+      <TaskSearch onSearch={handleSearch} />
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         <div
           className="add-card"
@@ -74,7 +92,7 @@ const Home = () => {
           <AddBoxIcon style={{ fontSize: 50 }} />
           <p style={{ margin: "8px", fontWeight: "bold" }}>Add a new task</p>
         </div>
-        {sortedTasks.map((task) => (
+        {filteredTasks.map((task) => (
           <TaskCard key={task.id} task={task} categories={categories} />
         ))}
       </div>
