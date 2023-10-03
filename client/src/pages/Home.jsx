@@ -5,12 +5,17 @@ import TaskForm from "../components/Task_Form";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import TaskSorting from "../components/Task_Sorting";
 import { sortTasks } from "../utils/Sort_Tasks";
+import Task_Completed from "../components/Task_Completed";
+import TaskSearch from "../components/Task_Search";
 
 const Home = () => {
   const [tasks, setTasks] = useState([]);
   const [categories, setCategories] = useState([]);
   const [showForm, setShowForm] = useState(false);
-  const [sortOption, setSortOption] = useState("uncompletedFirst");
+  const [filteredTasks, setFilteredTasks] = useState([]);
+  const [sortOption, setSortOption] = useState("date");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredAndSortedTasks, setFilteredAndSortedTasks] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:5000/tasks")
@@ -28,6 +33,20 @@ const Home = () => {
 
   const sortedTasks = sortTasks(tasks, sortOption);
 
+  useEffect(() => {
+    const filtered = tasks.filter((task) =>
+      task.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    const sorted = sortTasks(filtered, sortOption);
+
+    setFilteredAndSortedTasks(sorted);
+  }, [tasks, searchQuery, sortedTasks, sortOption]);
+
+  const handleSearch = (newQuery) => {
+    setSearchQuery(newQuery);
+  };
+
   const handleToggleForm = () => {
     setShowForm(!showForm);
   };
@@ -36,11 +55,22 @@ const Home = () => {
     setShowForm(false);
   };
 
+  const completedTasks = sortedTasks.filter((task) => task.completion_state);
+
+  const numberOfCompletedTasks = completedTasks.length;
+
   return (
     <div>
       <h1>Task Manager</h1>
-      <TaskSorting onSort={handleSort} />
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
+      <div className="Display-Manipulation-Zone">
+        <TaskSorting onSort={handleSort} />
+        <Task_Completed
+          completedTasks={numberOfCompletedTasks}
+          totalTasks={tasks.length}
+        />
+      </div>
+      <TaskSearch onSearch={handleSearch} />
+      <div className="Tasks-Display" style={{ display: "flex", flexWrap: "wrap" }}>
         <div
           className="add-card"
           style={{
@@ -63,7 +93,7 @@ const Home = () => {
           <AddBoxIcon style={{ fontSize: 50 }} />
           <p style={{ margin: "8px", fontWeight: "bold" }}>Add a new task</p>
         </div>
-        {sortedTasks.map((task) => (
+        {filteredAndSortedTasks.map((task) => (
           <TaskCard key={task.id} task={task} categories={categories} />
         ))}
       </div>

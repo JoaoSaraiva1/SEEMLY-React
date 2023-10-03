@@ -127,7 +127,7 @@ const Task_Card = ({ task, categories }) => {
       });
   };
 
-  const handleSubmit = () => {
+  const handleSubmitEdit = () => {
     const updatedTask = {
       ...task,
       name,
@@ -202,7 +202,7 @@ const Task_Card = ({ task, categories }) => {
             value={date}
             onChange={handleDateChange}
           />
-          <button className="task-card_button_editing" onClick={handleSubmit}>
+          <button className="task-card_button_editing" onClick={handleSubmitEdit}>
             Save
           </button>
         </>
