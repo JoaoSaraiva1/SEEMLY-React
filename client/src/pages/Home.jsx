@@ -10,11 +10,9 @@ import TaskSearch from "../components/Task_Search";
 
 const Home = () => {
   const [tasks, setTasks] = useState([]);
-  console.log("🚀 ~ file: Home.jsx:12 ~ Home ~ tasks:", tasks);
   const [categories, setCategories] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [filteredTasks, setFilteredTasks] = useState([]);
-  console.log("🚀 ~ file: Home.jsx:16 ~ Home ~ filteredTasks:", filteredTasks);
   const [sortOption, setSortOption] = useState("date");
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredAndSortedTasks, setFilteredAndSortedTasks] = useState([]);
@@ -43,7 +41,7 @@ const Home = () => {
     const sorted = sortTasks(filtered, sortOption);
 
     setFilteredAndSortedTasks(sorted);
-  }, [tasks, searchQuery, sortedTasks]);
+  }, [tasks, searchQuery, sortedTasks, sortOption]);
 
   const handleSearch = (newQuery) => {
     setSearchQuery(newQuery);
@@ -64,16 +62,15 @@ const Home = () => {
   return (
     <div>
       <h1>Task Manager</h1>
-      <div className="search-sort-completed">
+      <div className="Display-Manipulation-Zone">
         <TaskSorting onSort={handleSort} />
         <Task_Completed
           completedTasks={numberOfCompletedTasks}
           totalTasks={tasks.length}
         />
       </div>
-      <TaskSorting onSort={handleSort} />
       <TaskSearch onSearch={handleSearch} />
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
+      <div className="Tasks-Display" style={{ display: "flex", flexWrap: "wrap" }}>
         <div
           className="add-card"
           style={{
