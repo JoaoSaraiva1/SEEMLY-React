@@ -14,9 +14,10 @@ const Home = () => {
   const [categories, setCategories] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [filteredTasks, setFilteredTasks] = useState([]);
-  console.log("🚀 ~ file: Home.jsx:16 ~ Home ~ filteredTasks:", filteredTasks)
+  console.log("🚀 ~ file: Home.jsx:16 ~ Home ~ filteredTasks:", filteredTasks);
   const [sortOption, setSortOption] = useState("date");
-  const [searchQuery, setSearchQuery] = useState(""); 
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredAndSortedTasks, setFilteredAndSortedTasks] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:5000/tasks")
@@ -35,14 +36,17 @@ const Home = () => {
   const sortedTasks = sortTasks(tasks, sortOption);
 
   useEffect(() => {
-    const filtered = sortedTasks.filter((task) =>
+    const filtered = tasks.filter((task) =>
       task.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
-    setFilteredTasks(filtered);
+
+    const sorted = sortTasks(filtered, sortOption);
+
+    setFilteredAndSortedTasks(sorted);
   }, [tasks, searchQuery, sortedTasks]);
 
   const handleSearch = (newQuery) => {
-    setSearchQuery(newQuery); 
+    setSearchQuery(newQuery);
   };
 
   const handleToggleForm = () => {
@@ -92,7 +96,7 @@ const Home = () => {
           <AddBoxIcon style={{ fontSize: 50 }} />
           <p style={{ margin: "8px", fontWeight: "bold" }}>Add a new task</p>
         </div>
-        {filteredTasks.map((task) => (
+        {filteredAndSortedTasks.map((task) => (
           <TaskCard key={task.id} task={task} categories={categories} />
         ))}
       </div>
