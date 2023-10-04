@@ -7,16 +7,18 @@ import TaskSorting from "../components/Task_Sorting";
 import { sortTasks } from "../utils/Sort_Tasks";
 import Task_Completed from "../components/Task_Completed";
 import TaskSearch from "../components/Task_Search";
+import Sidebar from "../components/Sidebar.jsx";
 
 const Home = () => {
   const [tasks, setTasks] = useState([]);
   const [categories, setCategories] = useState([]);
   const [showForm, setShowForm] = useState(false);
-  const [filteredTasks, setFilteredTasks] = useState([]);
   const [sortOption, setSortOption] = useState("date");
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredAndSortedTasks, setFilteredAndSortedTasks] = useState([]);
+  const [isSidebarVisible, setIsSidebarVisible] = useState(true);
 
+  //DATA FETCHING
   useEffect(() => {
     fetch("http://localhost:5000/tasks")
       .then((response) => response.json())
@@ -27,6 +29,7 @@ const Home = () => {
       .then((data) => setCategories(data));
   }, []);
 
+  //SORTING and SEARCHING LOGIC
   const handleSort = (selectedSortOption) => {
     setSortOption(selectedSortOption);
   };
@@ -59,8 +62,19 @@ const Home = () => {
 
   const numberOfCompletedTasks = completedTasks.length;
 
+  //SIDEBAR LOGIC
+  const toggleSidebar = () => {
+    setIsSidebarVisible(!isSidebarVisible);
+  };
+
   return (
     <div>
+      <div className="Sidebar">
+        <button onClick={toggleSidebar}>
+          {isSidebarVisible ? "Hide Sidebar" : "Show Sidebar"}
+        </button>
+        {isSidebarVisible && <Sidebar isSidebarVisible={isSidebarVisible}/>}
+      </div>
       <h1>Task Manager</h1>
       <div className="Display-Manipulation-Zone">
         <TaskSorting onSort={handleSort} />
@@ -70,7 +84,10 @@ const Home = () => {
         />
       </div>
       <TaskSearch onSearch={handleSearch} />
-      <div className="Tasks-Display" style={{ display: "flex", flexWrap: "wrap" }}>
+      <div
+        className="Tasks-Display"
+        style={{ display: "flex", flexWrap: "wrap" }}
+      >
         <div
           className="add-card"
           style={{
@@ -96,14 +113,6 @@ const Home = () => {
         {filteredAndSortedTasks.map((task) => (
           <TaskCard key={task.id} task={task} categories={categories} />
         ))}
-      </div>
-      <div>
-        <h2>Categories</h2>
-        <ul>
-          {categories.map((category) => (
-            <li key={category.id}>{category.name}</li>
-          ))}
-        </ul>
       </div>
       {showForm && (
         <TaskForm
