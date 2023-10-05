@@ -1,40 +1,35 @@
-/* Sidebar.css */
+.Sidebar {
+  background-color: #2c3e50; /* Background color for the sidebar */
+  color: #ecf0f1; /* Text color */
+  width: 250px; /* Width of the sidebar */
+  padding: 20px; /* Spacing inside the sidebar */
+  position: fixed; /* Fixed position to keep it always visible */
+  top: 0; /* Position at the top of the viewport */
+  left: 0; /* Position at the left of the viewport */
+  height: 100%; /* Make the sidebar full height */
+}
 
-.sidebar {
-    width: 250px; /* Set the width of the sidebar */
-    height: 100%; /* Make it cover the entire height of the content area */
-    position: fixed; /* Fixed positioning to stay on the side */
-    top: 0;
-    left: -250px; /* Start hidden outside the viewport */
-    background-color: #333; /* Background color for the sidebar */
-    color: #fff; /* Text color for menu items */
-    transition: left 0.3s; /* Smooth transition for animation */
-    overflow-y: auto; /* Enable scrolling if the content exceeds the sidebar height */
-  }
-  
-  .sidebar.visible {
-    left: 0; /* Show the sidebar when it's visible */
-  }
-  
-  /* Style for the menu items */
-  .sidebar ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .sidebar ul li {
-    padding: 10px;
-  }
-  
-  .sidebar ul li a {
-    text-decoration: none;
-    color: #fff;
-  }
-  
-  /* Style for the heading */
-  .sidebar h2 {
-    padding: 10px;
-    background-color: #222;
-    margin: 0;
-  }
-  
+.Sidebar h2 {
+  font-size: 1.5rem; /* Heading size */
+  margin-bottom: 20px; /* Spacing below the heading */
+}
+
+.Sidebar ul {
+  list-style: none; /* Remove list bullet points */
+  padding: 0; /* Remove default padding */
+}
+
+.Sidebar li {
+  margin-bottom: 10px; /* Spacing between list items */
+}
+
+.Sidebar a {
+  text-decoration: none; /* Remove underline on links */
+  color: #ecf0f1; /* Link text color */
+  font-size: 1.2rem; /* Link text size */
+  transition: color 0.3s; /* Smooth color transition on hover */
+}
+
+.Sidebar a:hover {
+  color: #3498db; /* Change text color on hover */
+}

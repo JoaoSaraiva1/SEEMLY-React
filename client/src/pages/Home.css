@@ -1,0 +1,43 @@
+/* Home.css */
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #666;
+    --star-color: #f0c040;
+    --completed-color: green;
+  }
+
+.Main-Container {
+  display: flex; /* Use Flexbox */
+  flex-wrap: nowrap; /* Prevent wrapping of columns */
+}
+
+.Sidebar-Container {
+  flex: 0 0 15%; /* Sidebar takes 15% of the available width */
+  /* Add any additional styling for the sidebar */
+}
+
+.Main-Content {
+  flex: 1; /* Main content takes the remaining space */
+  /* Add any additional styling for the main content */
+}
+
+.Add-Card {
+  border: 2px dashed #bdbdbd;
+  width: 250px;
+  height: 300px;
+  border-radius: 16px;
+  margin: 16px;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+  background-color: #f5f5f5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.Add-Card p {
+  margin: 8px;
+  font-weight: bold;
+}

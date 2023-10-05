@@ -1,10 +1,9 @@
 import React from "react";
-import "./Sidebar.css"; 
+import "./Sidebar.css";
 
-const Sidebar = ({ isSidebarVisible }) => {
-  console.log("🚀 ~ file: Sidebar.jsx:5 ~ Sidebar ~ isSidebarVisible:", isSidebarVisible)
+const Sidebar = () => {
   return (
-    <div className="Sidebar">
+    <div className={"Sidebar"}>
       <h2>Menu</h2>
       <ul>
         <li>
