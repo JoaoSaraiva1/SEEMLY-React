@@ -11,7 +11,7 @@ import IOSSwitch from "./Utils/IOSSwitch";
 
 import "./Task_Card.css";
 
-const Task_Card = ({ task, categories }) => {
+const Task_Card = ({ task, categories, updateTask }) => {
   const {
     id,
     name: initialName,
@@ -81,6 +81,8 @@ const Task_Card = ({ task, categories }) => {
       })
       .then(() => {
         setIsFavorite((prevIsFavorite) => !prevIsFavorite);
+
+        updateTask(id, { favorite: !isFavorite });
       })
       .catch((error) => {
         console.log(error);
@@ -95,8 +97,9 @@ const Task_Card = ({ task, categories }) => {
     axios
       .delete(`http://localhost:5000/tasks/${id}`)
       .then((response) => {
-        console.log(response.data);
         setIsDeleted(true);
+
+        updateTask(id, { isDeleted: true });
       })
       .catch((error) => {
         console.log(error);
@@ -122,6 +125,8 @@ const Task_Card = ({ task, categories }) => {
       .put(`http://localhost:5000/tasks/${id}`, updatedTask)
       .then(() => {
         setIsCompleted(!isCompleted);
+
+        updateTask(id, { completion_state: !isCompleted });
       })
       .catch((error) => {
         console.log(error);
@@ -142,6 +147,8 @@ const Task_Card = ({ task, categories }) => {
       .put(`http://localhost:5000/tasks/${id}`, updatedTask)
       .then((response) => {
         setTaskCategory(selectedCategory);
+
+        updateTask(id, updatedTask);
       })
       .catch((error) => {
         console.log(error);

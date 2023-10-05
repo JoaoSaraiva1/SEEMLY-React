@@ -21,13 +21,13 @@ const Home = () => {
 
   //DATA FETCHING
   useEffect(() => {
-    fetch("http://localhost:5000/tasks")
-      .then((response) => response.json())
-      .then((data) => setTasks(data));
-
+          fetch("http://localhost:5000/tasks")
+        .then((response) => response.json())
+        .then((data) => setTasks(data));
+          
     fetch("http://localhost:5000/categories")
-      .then((response) => response.json())
-      .then((data) => setCategories(data));
+        .then((response) => response.json())
+      .then((data) => setCategories(data)); 
   }, []);
 
   //SORTING and SEARCHING LOGIC
@@ -59,6 +59,17 @@ const Home = () => {
     setShowForm(false);
   };
 
+  const updateTask = (taskId, updatedProperties) => {
+    const updatedTasks = tasks.map((task) => {
+      if (task.id === taskId) {
+        return { ...task, ...updatedProperties };
+      }
+      return task;
+    });
+
+    setTasks(updatedTasks);
+  };
+
   const completedTasks = sortedTasks.filter((task) => task.completion_state);
 
   const numberOfCompletedTasks = completedTasks.length;
@@ -87,7 +98,12 @@ const Home = () => {
             <p>Add a new task</p>
           </div>
           {filteredAndSortedTasks.map((task) => (
-            <TaskCard key={task.id} task={task} categories={categories} />
+            <TaskCard
+              key={task.id}
+              task={task}
+              categories={categories}
+              updateTask={updateTask}
+            />
           ))}
         </div>
         {showForm && (
