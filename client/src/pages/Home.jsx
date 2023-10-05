@@ -7,6 +7,8 @@ import TaskSorting from "../components/Task_Sorting";
 import TaskCompleted from "../components/Task_Completed";
 import TaskSearch from "../components/Task_Search";
 import Sidebar from "../components/Sidebar.jsx";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 import { sortTasks } from "../utils/Sort_Tasks";
 
 import "./Home.css";
@@ -18,16 +20,27 @@ const Home = () => {
   const [sortOption, setSortOption] = useState("date");
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredAndSortedTasks, setFilteredAndSortedTasks] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   //DATA FETCHING
   useEffect(() => {
-          fetch("http://localhost:5000/tasks")
+    setIsLoading(true);
+    setTimeout(() => {
+      fetch("http://localhost:5000/tasks")
         .then((response) => response.json())
-        .then((data) => setTasks(data));
-          
-    fetch("http://localhost:5000/categories")
+        .then((data) => {
+          setTasks(data);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          console.error("Error fetching tasks:", error);
+          setIsLoading(false);
+        });
+
+      fetch("http://localhost:5000/categories")
         .then((response) => response.json())
-      .then((data) => setCategories(data)); 
+        .then((data) => setCategories(data));
+    }, 1000);
   }, []);
 
   //SORTING and SEARCHING LOGIC
@@ -45,7 +58,7 @@ const Home = () => {
     const sorted = sortTasks(filtered, sortOption);
 
     setFilteredAndSortedTasks(sorted);
-  }, [searchQuery, sortOption]);
+  }, [searchQuery, sortOption, isLoading]);
 
   const handleSearch = (newQuery) => {
     setSearchQuery(newQuery);
@@ -97,14 +110,22 @@ const Home = () => {
             <AddBoxIcon style={{ fontSize: 50 }} />
             <p>Add a new task</p>
           </div>
-          {filteredAndSortedTasks.map((task) => (
-            <TaskCard
-              key={task.id}
-              task={task}
-              categories={categories}
-              updateTask={updateTask}
-            />
-          ))}
+          {isLoading ? (
+            <div className="Loading-State">
+              <Box sx={{ display: "flex" }}>
+                <CircularProgress />
+              </Box>
+            </div>
+          ) : (
+            filteredAndSortedTasks.map((task) => (
+              <TaskCard
+                key={task.id}
+                task={task}
+                categories={categories}
+                updateTask={updateTask}
+              />
+            ))
+          )}
         </div>
         {showForm && (
           <TaskForm

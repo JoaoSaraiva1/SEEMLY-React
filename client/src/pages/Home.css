@@ -54,3 +54,14 @@
   margin: 8px;
   font-weight: bold;
 }
+
+.Loading-State{
+  width: 250px;
+  height: 300px;
+  margin: 16px;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;  
+}
