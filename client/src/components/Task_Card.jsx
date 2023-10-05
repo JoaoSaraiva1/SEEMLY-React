@@ -139,7 +139,6 @@ const Task_Card = ({ task, categories, updateTask }) => {
       name,
       description,
       date,
-
       category_id: selectedCategory.value,
     };
 

@@ -9,6 +9,8 @@ import TaskSearch from "../components/Task_Search";
 import Sidebar from "../components/Sidebar.jsx";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 import { sortTasks } from "../utils/Sort_Tasks";
 
 import "./Home.css";
@@ -21,6 +23,8 @@ const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredAndSortedTasks, setFilteredAndSortedTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const itemsPerPage = 9;
 
   //DATA FETCHING
   useEffect(() => {
@@ -58,7 +62,7 @@ const Home = () => {
     const sorted = sortTasks(filtered, sortOption);
 
     setFilteredAndSortedTasks(sorted);
-  }, [searchQuery, sortOption, isLoading]);
+  }, [searchQuery, sortOption, isLoading, page]);
 
   const handleSearch = (newQuery) => {
     setSearchQuery(newQuery);
@@ -86,6 +90,13 @@ const Home = () => {
   const completedTasks = sortedTasks.filter((task) => task.completion_state);
 
   const numberOfCompletedTasks = completedTasks.length;
+
+  // Calculate the start and end indices for the current page
+  const startIndex = (page - 1) * itemsPerPage;
+  const endIndex = page * itemsPerPage;
+
+  // Slice the tasks to display only the tasks for the current page
+  const tasksToDisplay = filteredAndSortedTasks.slice(startIndex, endIndex);
 
   return (
     <div className="Main-Container">
@@ -117,7 +128,7 @@ const Home = () => {
               </Box>
             </div>
           ) : (
-            filteredAndSortedTasks.map((task) => (
+            tasksToDisplay.map((task) => (
               <TaskCard
                 key={task.id}
                 task={task}
@@ -126,6 +137,15 @@ const Home = () => {
               />
             ))
           )}
+        </div>
+        <div className="Pagination-Container">
+          <Stack spacing={2} justifyContent="center" alignItems="center">
+            <Pagination
+              count={Math.ceil(filteredAndSortedTasks.length / itemsPerPage)}
+              page={page}
+              onChange={(event, value) => setPage(value)}
+            />
+          </Stack>
         </div>
         {showForm && (
           <TaskForm
