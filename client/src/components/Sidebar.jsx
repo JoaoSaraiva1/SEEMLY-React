@@ -1,10 +1,13 @@
 import React from "react";
+
+import logoImage from "../images/logo.png";
+
 import "./Sidebar.css";
 
 const Sidebar = () => {
   return (
     <div className={"Sidebar"}>
-      <h2>Menu</h2>
+      <img className="Logo-Image" src={logoImage} alt="Task Manager Logo" />
       <ul>
         <li>
           <a href="/">Home</a>

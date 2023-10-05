@@ -4,7 +4,7 @@ import AddBoxIcon from "@mui/icons-material/AddBox";
 import TaskCard from "../components/Task_Card";
 import TaskForm from "../components/Task_Form";
 import TaskSorting from "../components/Task_Sorting";
-import Task_Completed from "../components/Task_Completed";
+import TaskCompleted from "../components/Task_Completed";
 import TaskSearch from "../components/Task_Search";
 import Sidebar from "../components/Sidebar.jsx";
 import { sortTasks } from "../utils/Sort_Tasks";
@@ -45,7 +45,7 @@ const Home = () => {
     const sorted = sortTasks(filtered, sortOption);
 
     setFilteredAndSortedTasks(sorted);
-  }, [tasks, searchQuery, sortedTasks, sortOption]);
+  }, [searchQuery, sortOption]);
 
   const handleSearch = (newQuery) => {
     setSearchQuery(newQuery);
@@ -69,15 +69,15 @@ const Home = () => {
         <Sidebar />
       </div>
       <div className="Main-Content">
-        <h1>Task Manager</h1>
         <div className="Display-Manipulation-Zone">
-          <TaskSorting onSort={handleSort} />
-          <Task_Completed
+          <TaskSearch className="Task-Search" onSearch={handleSearch} />
+          <TaskCompleted
+            className="Task-Completed"
             completedTasks={numberOfCompletedTasks}
             totalTasks={tasks.length}
           />
+          <TaskSorting className="Task-Sorting" onSort={handleSort} />
         </div>
-        <TaskSearch onSearch={handleSearch} />
         <div
           className="Tasks-Display"
           style={{ display: "flex", flexWrap: "wrap" }}

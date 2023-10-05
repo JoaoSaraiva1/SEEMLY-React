@@ -1,0 +1,31 @@
+/* Task_Sorting.css */
+
+.Task-Sorting-Container {
+  display: flex; /* Add flex display */
+  align-items: center; /* Vertically center items */
+  padding: 16px;
+  margin-right: 16px;
+}
+
+/* Adjust label styles */
+.Task-Sorting-Container label {
+  margin: 4px;
+  text-align: center;
+  font-size: large;
+}
+
+.Task-Sorting-Select {
+  border: none;
+  outline: none;
+  padding: 20px;
+  font-size: 16px;
+  background-color: #f2f2f2;
+  border-radius: 25px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.Task-Sorting-Select:focus {
+  background-color: #fff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}

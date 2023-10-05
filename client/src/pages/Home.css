@@ -1,14 +1,7 @@
 /* Home.css */
-:root {
-    --primary-color: #007bff;
-    --secondary-color: #666;
-    --star-color: #f0c040;
-    --completed-color: green;
-  }
 
 .Main-Container {
   display: flex; /* Use Flexbox */
-  flex-wrap: nowrap; /* Prevent wrapping of columns */
 }
 
 .Sidebar-Container {
@@ -16,9 +9,29 @@
   /* Add any additional styling for the sidebar */
 }
 
+.Display-Manipulation-Zone {
+  display: flex; /* Use Flexbox to arrange items in a line */
+  align-items: center; /* Vertically center items within the line */
+  justify-content: space-between; /* Add space between items */
+}
+
+.Task-Search {
+  flex: 1; /* Allow TaskSearch to take up available space on the left */
+  text-align: left; /* Left-align the content within TaskSearch */
+  margin-right: 8px; /* Add some space between TaskSearch and TaskCompleted */
+}
+
+.Task-Completed {
+  text-align: center;
+}
+
+.Task-Sorting {
+  flex: 1; /* Allow TaskSorting to take up available space on the right */
+  text-align: right; /* Right-align the content within TaskSorting */
+}
+
 .Main-Content {
   flex: 1; /* Main content takes the remaining space */
-  /* Add any additional styling for the main content */
 }
 
 .Add-Card {
