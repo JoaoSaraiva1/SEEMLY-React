@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Box, IconButton } from "@mui/material";
+import { Box, Button, IconButton } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import CloseIcon from "@mui/icons-material/Close";
 import Select from "react-select";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 import IOSSwitch from "./Utils/IOSSwitch";
 
 import "./Task_Card.css";
@@ -43,6 +45,8 @@ const Task_Card = ({ task, categories, updateTask }) => {
   const [isDeleted, setIsDeleted] = useState(false);
   const [isCompleted, setIsCompleted] = useState(completion_state);
   const [taskCategory, setTaskCategory] = useState("");
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+  const [deletedTask, setDeletedTask] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState({
     value: taskCategory.id,
     label: taskCategory.name,
@@ -104,6 +108,55 @@ const Task_Card = ({ task, categories, updateTask }) => {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const handleDeleteTask = (task) => {
+    // Store the deleted task in the state
+    setDeletedTask(task);
+
+    // Show the Snackbar
+    setIsSnackbarOpen(true);
+
+    setIsDeleted(true);
+  };
+
+  const handleSnackbarClose = () => {
+    // If the user clicked "Undo," you can re-add the deleted task
+    if (deletedTask) {
+      // Reset the state to undelete the task
+      setIsDeleted(false);
+
+      // You can also send an Axios request here to undelete the task on the server
+      // Once undeleted, update the task list on success
+      // Don't forget to reset the `deletedTask` state to `null`
+      axios
+        .put(`http://localhost:5000/tasks/${id}`, {
+          ...task,
+          isDeleted: false, // Update the `isDeleted` property on the server
+        })
+        .then(() => {
+          // Update the task list on success
+          updateTask(id, { isDeleted: false });
+          setIsSnackbarOpen(false);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      setDeletedTask(null);
+    } else {
+      // If the Snackbar closes without "Undo," send the Axios DELETE request
+      axios
+        .delete(`http://localhost:5000/tasks/${id}`)
+        .then((response) => {
+          // Update the task list on success
+          updateTask(id, { isDeleted: true });
+          setIsSnackbarOpen(false);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   const handleNameChange = (event) => {
@@ -251,9 +304,31 @@ const Task_Card = ({ task, categories, updateTask }) => {
               <DeleteIcon
                 sx={{ fontSize: 30 }}
                 className="Task-Card_Icon"
-                onClick={handleDeleteClick}
+                onClick={handleDeleteTask}
               />
             </div>
+            <Snackbar
+              open={isSnackbarOpen}
+              autoHideDuration={6000}
+              onClose={handleSnackbarClose}
+            >
+              <MuiAlert
+                elevation={6}
+                variant="filled"
+                severity="error"
+                action={
+                  <Button
+                    color="inherit"
+                    size="small"
+                    onClick={handleSnackbarClose}
+                  >
+                    Undo
+                  </Button>
+                }
+              >
+                Task deleted.
+              </MuiAlert>
+            </Snackbar>
           </div>
         </>
       )}

@@ -34,6 +34,14 @@
   flex: 1; /* Main content takes the remaining space */
 }
 
+.Tasks-Display{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 18px;
+}
+
 .Add-Card {
   border: 2px dashed #bdbdbd;
   width: 250px;
