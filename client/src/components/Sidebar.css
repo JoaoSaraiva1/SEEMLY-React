@@ -1,0 +1,40 @@
+.Sidebar {
+  background-color: #365249; /* Background color for the sidebar */
+  color: #7fabb6; /* Text color */
+  width: 250px; /* Width of the sidebar */
+  padding: 20px; /* Spacing inside the sidebar */
+  position: fixed; /* Fixed position to keep it always visible */
+  top: 0; /* Position at the top of the viewport */
+  left: 0; /* Position at the left of the viewport */
+  height: 100%; /* Make the sidebar full height */
+}
+
+.Sidebar h2 {
+  font-size: 1.5rem; /* Heading size */
+  margin-bottom: 20px; /* Spacing below the heading */
+}
+
+.Sidebar ul {
+  list-style: none; /* Remove list bullet points */
+  padding: 0; /* Remove default padding */
+}
+
+.Sidebar li {
+  margin-bottom: 10px; /* Spacing between list items */
+}
+
+.Sidebar a {
+  text-decoration: none; /* Remove underline on links */
+  color: #ecf0f1; /* Link text color */
+  font-size: 1.2rem; /* Link text size */
+  transition: color 0.3s; /* Smooth color transition on hover */
+}
+
+.Sidebar a:hover {
+  color: #3498db; /* Change text color on hover */
+}
+
+.Logo-Image{
+  width: 100%;
+  height: 225px;
+}

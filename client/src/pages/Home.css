@@ -1,0 +1,75 @@
+/* Home.css */
+
+.Main-Container {
+  display: flex; /* Use Flexbox */
+}
+
+.Sidebar-Container {
+  flex: 0 0 15%; /* Sidebar takes 15% of the available width */
+  /* Add any additional styling for the sidebar */
+}
+
+.Display-Manipulation-Zone {
+  display: flex; /* Use Flexbox to arrange items in a line */
+  align-items: center; /* Vertically center items within the line */
+  justify-content: space-between; /* Add space between items */
+}
+
+.Task-Search {
+  flex: 1; /* Allow TaskSearch to take up available space on the left */
+  text-align: left; /* Left-align the content within TaskSearch */
+  margin-right: 8px; /* Add some space between TaskSearch and TaskCompleted */
+}
+
+.Task-Completed {
+  text-align: center;
+}
+
+.Task-Sorting {
+  flex: 1; /* Allow TaskSorting to take up available space on the right */
+  text-align: right; /* Right-align the content within TaskSorting */
+}
+
+.Main-Content {
+  flex: 1; /* Main content takes the remaining space */
+}
+
+.Add-Card {
+  border: 2px dashed #bdbdbd;
+  width: 250px;
+  height: 300px;
+  border-radius: 16px;
+  margin: 16px;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+  background-color: #f5f5f5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.Add-Card p {
+  margin: 8px;
+  font-weight: bold;
+}
+
+.Loading-State{
+  width: 250px;
+  height: 300px;
+  margin: 16px;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;  
+}
+
+.Pagination-Container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 16px;
+  margin-right: 42px;
+}

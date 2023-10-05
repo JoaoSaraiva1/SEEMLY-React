@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
- const TaskSearch = ({ onSearch }) => {
+import "./Task_Search.css"; 
+
+const TaskSearch = ({ onSearch }) => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearchInputChange = (event) => {
@@ -10,8 +12,9 @@ import React, { useState } from "react";
   };
 
   return (
-    <div>
+    <div className="Task-Search-Container">
       <input
+        className="Task-Search-Input" 
         type="text"
         placeholder="Search by task name or category..."
         value={searchQuery}

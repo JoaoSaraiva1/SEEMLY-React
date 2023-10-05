@@ -1,0 +1,15 @@
+/* Task_Completed.css */
+
+.Task-Completed-Container {
+  text-align: center; /* Center-align the child elements */
+  width: 25%;
+  height: auto;
+}
+
+.Task-Completed-Container p {
+  font-size: 18px;
+  font-weight: bold;
+  display: inline-block; /* Display as inline-block to keep them on the same line */
+  margin: 0;
+  margin-top: 5px;
+}

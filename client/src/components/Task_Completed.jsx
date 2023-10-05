@@ -1,17 +1,26 @@
 import React from "react";
 import LinearProgress from "@mui/material/LinearProgress";
 
-const Task_Completed = ({ completedTasks, totalTasks }) => {
-  // Calculate the completion percentage
+import "./Task_Completed.css";
+
+const TaskCompleted = ({ completedTasks, totalTasks }) => {
   const completionPercentage = (completedTasks / totalTasks) * 100;
 
   return (
-    <div >
-      {completedTasks}
-      <LinearProgress variant="determinate" value={completionPercentage} />
-      {totalTasks}
+    <div className="Task-Completed-Container">
+      <div>
+        <LinearProgress
+          variant="determinate"
+          value={completionPercentage}
+          color="success"
+          style={{ height: "15px" , marginTop: "20px", borderRadius: "5px"}}
+        />
+      </div>
+      <p className="Task-Complete-Information">
+        {completedTasks} out of {totalTasks} completed
+      </p>
     </div>
   );
 };
 
-export default Task_Completed;
+export default TaskCompleted;

@@ -1,0 +1,26 @@
+/* TaskSearch.css */
+
+.Task-Search-Container {
+  padding: 16px;
+}
+
+.Task-Search-Input {
+  border: none;
+  outline: none;
+  padding: 20px;
+  font-size: 16px;
+  background-color: #f2f2f2;
+  border-radius: 25px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.Task-Search-Input::placeholder {
+  color: #aaa;
+}
+
+/* Style the input on focus */
+.Task-Search-Input:focus {
+  background-color: #fff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
